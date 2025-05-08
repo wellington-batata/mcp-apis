@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource tododb {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Todo {
+  id          String    @id @default(uuid())
+  description String?
+  createdAt   DateTime  @default(now())
+  finishDate  DateTime?
+  isCompleted Boolean   @default(false)
+  completedAt DateTime?
+  slug        String?   @unique
+
+  @@index([id], name: "idx_todo_id")
+  @@index([finishDate], name: "idx_finish_date")
+  @@index([isCompleted], name: "idx_is_completed")
+  @@map("todo")
+}
