@@ -135,6 +135,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -161,8 +165,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource tododb {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Todo {\n  id          String    @id @default(uuid())\n  description String?\n  createdAt   DateTime  @default(now())\n  finishDate  DateTime?\n  isCompleted Boolean   @default(false)\n  completedAt DateTime?\n  slug        String?   @unique\n\n  @@index([id], name: \"idx_todo_id\")\n  @@index([finishDate], name: \"idx_finish_date\")\n  @@index([isCompleted], name: \"idx_is_completed\")\n  @@map(\"todo\")\n}\n",
-  "inlineSchemaHash": "926712e8933acf3d7410f55e026da0abf99bff4925bdca1d2a88dee03df40150",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"linux-musl-openssl-3.0.x\"]\n  output        = \"../src/generated/prisma\"\n}\n\ndatasource tododb {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Todo {\n  id          String    @id @default(uuid())\n  description String?\n  createdAt   DateTime  @default(now())\n  finishDate  DateTime?\n  isCompleted Boolean   @default(false)\n  completedAt DateTime?\n  slug        String?   @unique\n\n  @@index([id], name: \"idx_todo_id\")\n  @@index([finishDate], name: \"idx_finish_date\")\n  @@index([isCompleted], name: \"idx_is_completed\")\n  @@map(\"todo\")\n}\n",
+  "inlineSchemaHash": "d5d10187b21c954d877589af18cc70bc06fbd95cdafb6bf9d8c7a073694353dc",
   "copyEngine": true
 }
 config.dirname = '/'

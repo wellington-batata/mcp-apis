@@ -1,0 +1,21 @@
+services:
+  general-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # Adicione aqui outras variáveis de ambiente necessárias para o Prisma
+    restart: always
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+      # Volume específico para o banco de dados SQLite
+      - sqlite-data:/app/prisma/data
+    command: sh -c "npx prisma migrate deploy && npm start"
+
+volumes:
+  sqlite-data:

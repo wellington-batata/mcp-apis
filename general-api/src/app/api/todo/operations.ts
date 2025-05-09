@@ -1,23 +1,24 @@
 import prisma  from "@/app/utils/prisma";
 
-async function getAll() {
+const getAll = async () => {
     const todos = await prisma.todo.findMany()
     return todos;
 }
 
 
-async function getById(slug: string) {
+const getById = async (slug: string) => {
     const todo = await prisma.todo.findFirst({ where: { slug: slug } })
     return todo;
 }
 
-async function create(data: any) {
+const create = async (data: any) => {
     const todo = await prisma.todo.create({ data })
     return todo;
 }
 
-export default {
+const operations = {
     getAll,
     getById,
     create
 }
+export default operations
